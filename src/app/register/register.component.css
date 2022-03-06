@@ -1,0 +1,23 @@
+h2 {
+  text-align: center;
+  padding-bottom: 5px;
+  color: blue;
+}
+
+.form-group {
+  width: 200px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+span {
+  color: red;
+}
+
+input.ng-invalid.ng-touched {
+  border: 3px solid red;
+}
+
+label {
+  color: blue;
+}
