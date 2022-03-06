@@ -1,0 +1,17 @@
+.menu {
+    border: solid 7px yellow;
+    background-color: blue;
+    padding-bottom: 40px;
+    padding-right: 10px;
+    width: 100%;
+}
+
+.nav navbar-nav navbar-right {
+   margin-left: 5px;
+}
+
+#links {
+  color: gold;
+  font-size: large;
+  font-weight: bold;
+}

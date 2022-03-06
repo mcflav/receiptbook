@@ -1,0 +1,84 @@
+<header>
+  <h3>Welcome {{ user.firstname }} {{ user.lastname }}</h3>
+  <h2>Receipt Form</h2>
+</header>
+<body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+          <app-alert [message]="error" *ngIf="error" (close)="onHandleError()" style="color: red"></app-alert>
+          <form (ngSubmit)="onSubmit()" #f="ngForm">
+            <br>
+            <div class="form-group" id="user-data">
+              <label for="receivedFrom">Received From:</label>
+              <input
+                type="text"
+                id="receivedFrom"
+                class="form-control"
+                ngModel
+                name="receivedFrom"
+                required
+                #receivedFrom="ngModel"
+                (click)="clearSubmitMessage()"><br>
+              <span class="help-block" *ngIf="!receivedFrom.valid && receivedFrom.touched">Please enter the customer name the payment was received from!</span>
+              <label for="amount">Amount:</label>
+              <input
+                type="number"
+                id="amount"
+                class="form-control"
+                ngModel
+                name="amount"
+                required
+                #amount="ngModel">
+              <span class="help-block" *ngIf="!amount.valid && amount.touched">Please enter the amount paid by the customer!</span><br>
+              <label for="paymentOf">For Payment Of:</label>
+              <input
+                type="text"
+                id="paymentOf"
+                class="form-control"
+                ngModel
+                name="paymentOf"
+                required
+                #paymentOf="ngModel"><br>
+              <label for="signature">Signature:</label>
+              <input
+                type="text"
+                id="signature"
+                class="form-control"
+                ngModel
+                name="signature"
+                required
+                #signature="ngModel">
+            </div>
+            <section class="payments">
+              <input type="radio" id="cash" name="payment_type" value="Cash" ngModel #payment_type="ngModel">
+              <label for="cash" id="cashLabel">Cash</label>
+              <input type="radio" id="cashApp" name="payment_type" value="CashApp" ngModel #payment_type="ngModel">
+              <label for="cashApp" id="cashAppLabel">Cash App</label>
+              <input type="radio" id="paypal" name="payment_type" value="Paypal" ngModel #payment_type="ngModel">
+              <label for="paypal" id="paypalLabel">Paypal</label>
+              <input type="radio" id="zelle" name="payment_type" value="Zelle" ngModel #payment_type="ngModel">
+              <label for="zelle" id="zelleLabel">Zelle</label><br>
+            </section>
+            <div class="form-group">
+              <button
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="!f.valid">Submit
+              </button>
+            </div><br>
+            <div class="form-group">
+              <button
+                class="btn btn-primary"
+                type="button"
+                (click)="onDisplayClicked()">Display Receipts
+              </button>
+            </div>
+            <div *ngIf="submitted">
+                <h3>Receipt Submitted!</h3>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</body>

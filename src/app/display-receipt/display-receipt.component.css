@@ -1,0 +1,39 @@
+h2 {
+  text-align: center;
+  padding-bottom: 5px;
+  color: blue;
+}
+
+h3{
+  text-align: center;
+  color: blue;
+}
+
+.form-group {
+  width: 200px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+p.solid {
+  border: solid 2px black;
+  width: 500px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.receiptHeader {
+  border: solid 2px blue;
+  width: 500px;
+  height: 20px;
+  color: white;
+  background-color:blue;
+}
+
+span {
+  color: red;
+}
+
+input.ng-invalid.ng-touched {
+  border: 3px solid red;
+}

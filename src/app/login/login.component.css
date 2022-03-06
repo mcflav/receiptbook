@@ -1,0 +1,32 @@
+h2 {
+    text-align: center;
+    padding-bottom: 5px;
+    color: blue;
+}
+
+.form-group {
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+label {
+  color: blue;
+}
+
+#password {
+  width: 200px;
+}
+
+span {
+  color: red;
+}
+
+input.ng-invalid.ng-touched {
+    border: 3px solid red;
+}
+
+show-hide-password{
+  color:blue;
+
+}
