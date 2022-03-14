@@ -1,27 +1,22 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
-import { ReceiptComponent } from './receipt/receipt.component';
-import { DisplayReceiptComponent } from './display-receipt/display-receipt.component';
-import { AccountantDisplayComponent } from './accountant-display/accountant-display.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'accountantDisplay', component: AccountantDisplayComponent },
-    { path: 'receipt/:email/:firstname/:lastname/:id', component: ReceiptComponent },
-    { path: 'displayReceipt/:email/:firstname/:lastname/:id', component: DisplayReceiptComponent },
+    { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)},
+    { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
+    { path: 'accountantDisplay', loadChildren: () => import('./accountant-display/accountant-display.module').then(m => m.AccountantDisplayModule)},
+    { path: 'receipt/:email/:firstname/:lastname/:id', loadChildren: () => import('./receipt/receipt.module').then(m => m.ReceiptModule)},
+    { path: 'displayReceipt/:email/:firstname/:lastname/:id', loadChildren: () => import('./display-receipt/display-receipt.module').then(m => m.DisplayReceiptModule)},
     { path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found!'} },
     { path: '**', redirectTo: '/not-found'}
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})
     ],
     exports: [RouterModule]
 })
