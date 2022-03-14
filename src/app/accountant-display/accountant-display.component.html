@@ -29,7 +29,7 @@
               required
               name="fromDate"
               #fromDate="ngModel">
-            <p>Format: m-d-yyyy </p>
+            <p>Format: m/d/yyyy </p>
             <span class="help-block" *ngIf="!fromDate.valid && fromDate.touched">Please enter a valid From Date!</span>
             <label for="toDate">To Date:</label>
             <input
@@ -40,7 +40,7 @@
               required
               name="toDate"
               #toDate="ngModel">
-              <p>Format: m-d-yyyy</p>
+              <p>Format: m/d/yyyy</p>
             <span class="help-block" *ngIf="!toDate.valid && toDate.touched">Please enter a valid To Date!</span><br>
             <div class="form-group">
               <button
@@ -70,10 +70,10 @@
               <div class="receiptHeader">RECEIPT</div>
               <p class="solid"><strong>Date: </strong><u>{{ receipt.receiptDate }}</u><br>
                   <strong>Received From: </strong><u>{{ receipt.receivedFrom }}</u><br>
-                  <strong>Amount: </strong><u>{{ receipt.amount }}</u><br>
+                  <strong>Amount: </strong><u>${{ receipt.amount }}</u><br>
                   <strong>For Payment Of: </strong><u>{{ receipt.paymentOf }}</u><br>
                   <strong>Payment Type: </strong><u>{{ receipt.paymentType }}</u><br>
-                  <strong>Signature: </strong><u>{{ receipt.signature }}</u>
+                  <strong>Signature: </strong><u>{{ receipt.signature }}</u><br>
                   <strong>Email: </strong><u>{{ receipt.email }}</u>
               </p><br>
             </div>
@@ -84,10 +84,10 @@
               <div class="receiptHeader">RECEIPT</div>
               <p class="solid"><strong>Date: </strong><u>{{ receipt.receiptDate }}</u><br>
                   <strong>Received From: </strong><u>{{ receipt.receivedFrom }}</u><br>
-                  <strong>Amount: </strong><u>{{ receipt.amount }}</u><br>
+                  <strong>Amount: </strong><u>${{ receipt.amount }}</u><br>
                   <strong>For Payment Of: </strong><u>{{ receipt.paymentOf }}</u><br>
                   <strong>Payment Type: </strong><u>{{ receipt.paymentType }}</u><br>
-                  <strong>Signature: </strong><u>{{ receipt.signature }}</u>
+                  <strong>Signature: </strong><u>{{ receipt.signature }}</u><br>
                   <strong>Email: </strong><u>{{ receipt.email }}</u>
               </p><br>
             </div>

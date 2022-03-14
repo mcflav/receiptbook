@@ -14,6 +14,10 @@ export class DisplayReceiptComponent implements OnInit {
   user: {email: string, firstname: string, lastname: string, id: string};
   getReceipts = [];
   getReceiptsByDate = [];
+  fromDate = [];
+  startDate;
+  toDate = [];
+  endDate;
   id: string;
   viewRange = false;
   viewAll = false;
