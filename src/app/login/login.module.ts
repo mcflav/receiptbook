@@ -15,10 +15,6 @@ import { NgModule } from "@angular/core";
         ShowHidePasswordModule,
         SharedModule,
         RouterModule.forChild([{ path: '', component: LoginComponent}])
-    ],
-
-    // exports: [
-
-    // ]
+    ]
 })
 export class LoginModule{}
