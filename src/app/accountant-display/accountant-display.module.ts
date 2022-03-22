@@ -12,7 +12,7 @@ import { AccountantDisplayComponent } from "./accountant-display.component";
   imports: [
       FormsModule,
       SharedModule,
-      RouterModule.forChild([{ path: '', component: AccountantDisplayComponent}])
+      RouterModule.forChild([{ path: '', component: AccountantDisplayComponent }])
   ]
 })
 export class AccountantDisplayModule{}

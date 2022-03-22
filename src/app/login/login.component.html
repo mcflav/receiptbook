@@ -14,6 +14,7 @@
                         <label for="email">Email:</label>
                         <input
                           type="email"
+                          onfocus="this.value=''"
                           id="email"
                           class="form-control"
                           ngModel
@@ -27,6 +28,7 @@
                         <show-hide-password size="sm" btnStyle="primary" [btnOutline]="false">
                         <input
                           type="password"
+                          onfocus="this.value=''"
                           id="password"
                           class="form-control"
                           ngModel

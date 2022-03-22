@@ -80,7 +80,7 @@ export class DisplayReceiptComponent implements OnInit {
   }
 
   onBack(){
-    this.router.navigate(['/receipt', this.user.email, this.user.firstname, this.user.lastname], {relativeTo: this.route});
+    this.router.navigate(['/receipt', this.user.email, this.user.firstname, this.user.lastname, this.user.id], {relativeTo: this.route});
   }
 
   onHandleError(){
