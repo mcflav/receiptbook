@@ -10,6 +10,19 @@
           <form (ngSubmit)="onSubmit()" #f="ngForm">
             <br>
             <div class="form-group" id="user-data">
+              <label for="receiptDate">Receipt Date:</label>
+              <input
+                type="date"
+                onfocus="this.value=''"
+                id="receiptDate"
+                class="form-control"
+                ngModel
+                name="receiptDate"
+                required
+                #receiptDate="ngModel"
+                (click)="clearSubmitMessage()"><br>
+              <span class="help-block" *ngIf="!receiptDate.valid && receiptDate.touched">Please enter the receipt date!</span>
+
               <label for="receivedFrom">Received From:</label>
               <input
                 type="text"
@@ -19,8 +32,7 @@
                 ngModel
                 name="receivedFrom"
                 required
-                #receivedFrom="ngModel"
-                (click)="clearSubmitMessage()"><br>
+                #receivedFrom="ngModel"><br>
               <span class="help-block" *ngIf="!receivedFrom.valid && receivedFrom.touched">Please enter the customer name the payment was received from!</span>
               <label for="amount">Amount:</label>
               <input
