@@ -17,6 +17,8 @@ export class AccountantDisplayComponent implements OnInit {
   viewRange = false;
   viewAll = false;
   noReceipts;
+  fromDate;
+  toDate;
   error: string = null;
 
   constructor(private router: Router,
@@ -36,7 +38,8 @@ export class AccountantDisplayComponent implements OnInit {
           console.log(data);
           this.receiptsService.setReceipt(data);
           this.getReceipts = this.receiptsService.getReceipts();
-          this.getReceiptsByDate = this.receiptsService.getReceiptsByDate(this.getReceipts, this.displayForm.value.fromDate, this.displayForm.value.toDate);
+          this.getReceiptsByDate = this.receiptsService.getReceiptsByDate(this.getReceipts,
+            this.fromDate = new Date(this.displayForm.value.fromDate), this.toDate = new Date(this.displayForm.value.toDate));
           this.noReceipts = this.getReceiptsByDate[0];
           if(this.noReceipts === "No Receipts" || this.noReceipts === undefined){
             this.error = "There are no receipts for this date range or you entered an incorrect date format!";

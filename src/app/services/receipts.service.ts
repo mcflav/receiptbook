@@ -7,6 +7,11 @@ export class ReceiptsService {
   private myReceipts = [];
   private myReceiptsByDate = [];
   private receiptDate;
+  private convertReceiptDate;
+  private convertFromDate;
+  private convertToDate;
+  private fromDate;
+  private toDate;
   private shortDate;
 
   getReceipts(){
@@ -24,13 +29,22 @@ export class ReceiptsService {
     return this.myReceipts;
   }
 
-  getReceiptsByDate(receipts: Receipt[], startDate: string, endDate: string){
+  getReceiptsByDate(receipts: Receipt[], startDate: Date, endDate: Date){
     this.myReceiptsByDate = [];
 
     for (let i = 0; i < receipts.length; i++) {
       this.receiptDate = new Date(this.receipts[i].receiptDate);
-      this.shortDate = this.receiptDate.toLocaleDateString();
-      if(this.shortDate >= startDate && this.shortDate <= endDate) {
+      this.convertReceiptDate = this.receiptDate.toUTCString();
+      this.shortDate = this.convertReceiptDate.split(' ').slice(0, 4).join(' ');
+      this.convertFromDate = startDate.toUTCString();
+      this.convertToDate = endDate.toUTCString();
+      this.fromDate = this.convertFromDate.split(' ').slice(0, 4).join(' ');
+      this.toDate = this.convertToDate.split(' ').slice(0, 4).join(' ');
+
+      console.log("shortdate: " + this.shortDate);
+      console.log("startdate: " + this.fromDate);
+      console.log("endDate: " + this.toDate);
+      if(this.shortDate >= this.fromDate && this.shortDate <= this.toDate) {
           this.myReceiptsByDate.push(this.receipts[i]);
       }
     }

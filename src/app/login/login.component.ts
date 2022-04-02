@@ -47,8 +47,6 @@ export class LoginComponent implements OnInit {
       this.login.password = this.loginForm.value.password;
       this.dataStorageService.validateUser({email: this.login.email, password: this.login.password})
           .subscribe(data => {
-            console.log(data.auth);
-              console.log(data);
               this.isLoading = false;
               this.error = null;
               this.isUserValid(data.auth);

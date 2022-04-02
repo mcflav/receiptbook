@@ -20,7 +20,7 @@
               required
               name="fromDate"
               #fromDate="ngModel">
-            <p>Format: m/d/yyyy</p>
+            <p>Format: mm/dd/yyyy</p>
             <span class="help-block" *ngIf="!fromDate.valid && fromDate.touched">Please enter a valid From Date!</span>
             <label for="toDate">To Date:</label>
             <input
@@ -32,7 +32,7 @@
               required
               name="toDate"
               #toDate="ngModel">
-              <p>Format: m/d/yyyy</p>
+              <p>Format: mm/dd/yyyy</p>
             <span class="help-block" *ngIf="!toDate.valid && toDate.touched">Please enter a valid To Date!</span><br>
             <div class="form-group">
               <button
