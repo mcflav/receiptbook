@@ -15,13 +15,24 @@ export class DisplayReceiptComponent implements OnInit {
   getReceipts = [];
   getReceiptsByDate = [];
   fromDate;
- // startDate;
   toDate;
- // endDate;
+  myString;
+  myReceipt;
   id: string;
+  noReceipts;
+  amount;
+  email;
+  paymentOf;
+  paymentType;
+  receiptDate;
+  receivedFrom;
+  signature;
+  userId;
+  receiptid;
   viewRange = false;
   viewAll = false;
-  noReceipts;
+  receiptFound = false;
+  noRequestId = true;
   error: string = null;
 
   constructor(private router: Router,
@@ -43,6 +54,7 @@ export class DisplayReceiptComponent implements OnInit {
   onView(){
     this.viewRange = true;
     this.viewAll = false;
+    this.receiptFound = false;
     this.dataStorageService.fetchReceipts(this.user.id)
       .subscribe(data => {
           console.log(data);
@@ -52,7 +64,7 @@ export class DisplayReceiptComponent implements OnInit {
             this.fromDate = new Date(this.displayForm.value.fromDate), this.toDate = new Date(this.displayForm.value.toDate));
           this.noReceipts = this.getReceiptsByDate[0];
           if(this.noReceipts === "No Receipts" || this.noReceipts === undefined){
-            this.error = "There are no receipts for this date range or you entered an incorrect date format!";
+            this.error = "There are no receipts for this date range!";
             this.viewRange = false;
           }
       },
@@ -64,6 +76,7 @@ export class DisplayReceiptComponent implements OnInit {
   onViewAll(){
     this.viewAll = true;
     this.viewRange = false;
+    this.receiptFound = false;
     this.dataStorageService.fetchReceipts(this.user.id)
       .subscribe(data => {
           console.log(data);
@@ -78,6 +91,34 @@ export class DisplayReceiptComponent implements OnInit {
       errorMessage => {
           this.error = errorMessage;
       })
+  }
+
+  onSearchById(){
+    this.viewAll = false;
+    this.viewRange = false;
+    this.receiptFound = false;
+    if(this.displayForm.value.receiptId === ''){
+        this.error = "Please enter a valid ReceiptId!";
+    }else {
+      this.dataStorageService.fetchReceiptById(this.displayForm.value.receiptId)
+      .subscribe(data => {
+          this.receiptFound = true;
+          this.myString = JSON.stringify(data);
+          this.myReceipt = JSON.parse(this.myString);
+          this.amount = this.myReceipt.amount;
+          this.email = this.myReceipt.email;
+          this.paymentOf = this.myReceipt.paymentOf;
+          this.paymentType = this.myReceipt.paymentType;
+          this.receiptDate = this.myReceipt.receiptDate;
+          this.receivedFrom = this.myReceipt.receivedFrom;
+          this.signature = this.myReceipt.signature;
+          this.receiptid = this.myReceipt._id;
+          console.log(this.receiptid);
+      },
+      errorMessage => {
+          this.error = errorMessage;
+      })
+    }
   }
 
   onBack(){

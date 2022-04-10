@@ -12,7 +12,7 @@
           <div class="form-group" id="user-data">
             <label for="fromDate">From Date:</label>
             <input
-              type="string"
+              type="date"
               onfocus="this.value=''"
               id="fromDate"
               class="form-control"
@@ -20,11 +20,10 @@
               required
               name="fromDate"
               #fromDate="ngModel">
-            <p>Format: mm/dd/yyyy</p>
             <span class="help-block" *ngIf="!fromDate.valid && fromDate.touched">Please enter a valid From Date!</span>
             <label for="toDate">To Date:</label>
             <input
-              type="string"
+              type="date"
               onfocus="this.value=''"
               id="toDate"
               class="form-control"
@@ -32,7 +31,6 @@
               required
               name="toDate"
               #toDate="ngModel">
-              <p>Format: mm/dd/yyyy</p>
             <span class="help-block" *ngIf="!toDate.valid && toDate.touched">Please enter a valid To Date!</span><br>
             <div class="form-group">
               <button
@@ -49,6 +47,25 @@
               </button>
             </div><br>
             <div class="form-group">
+              <label for="receiptId">Receipt Id:</label>
+              <input
+                type="text"
+                onfocus="this.value=''"
+                id="receiptId"
+                class="form-control"
+                ngModel
+                name="receiptId"
+                #receiptId="ngModel">
+              <span class="help-block" *ngIf="!receiptId.valid && receiptId.touched">Please enter a valid Receipt Id!</span>
+            </div><br>
+            <div class="form-group">
+              <button
+                class="btn btn-primary"
+                type="button"
+                (click)="onSearchById()">Search By Request Id
+              </button>
+            </div><br>
+            <div class="form-group">
               <button
                 class="btn btn-primary"
                 type="button"
@@ -60,7 +77,8 @@
             <div class="rangeReceipts" *ngFor="let receipt of getReceiptsByDate">
               <br>
               <div class="receiptHeader">RECEIPT</div>
-              <p class="solid"><strong>Date: </strong><u>{{ receipt.receiptDate }}</u><br>
+              <p class="solid"><strong>Receipt Id: </strong><u>{{ receipt._id }}</u><br>
+                  <strong>Date: </strong><u>{{ receipt.receiptDate }}</u><br>
                   <strong>Received From: </strong><u>{{ receipt.receivedFrom }}</u><br>
                   <strong>Amount: </strong><u>${{ receipt.amount }}</u><br>
                   <strong>For Payment Of: </strong><u>{{ receipt.paymentOf }}</u><br>
@@ -74,7 +92,8 @@
             <div class="allReceipts" *ngFor="let receipt of getReceipts">
               <br>
               <div class="receiptHeader">RECEIPT</div>
-              <p class="solid"><strong>Date: </strong><u>{{ receipt.receiptDate }}</u><br>
+              <p class="solid"><strong>Receipt Id: </strong><u>{{ receipt._id }}</u><br>
+                  <strong>Date: </strong><u>{{ receipt.receiptDate }}</u><br>
                   <strong>Received From: </strong><u>{{ receipt.receivedFrom }}</u><br>
                   <strong>Amount: </strong><u>${{ receipt.amount }}</u><br>
                   <strong>For Payment Of: </strong><u>{{ receipt.paymentOf }}</u><br>
@@ -83,6 +102,19 @@
                   <strong>Email: </strong><u>{{ receipt.email }}</u>
               </p><br>
             </div>
+          </div>
+          <div *ngIf="receiptFound">
+            <br>
+            <div class="receiptHeader">RECEIPT</div>
+            <p class="solid"><strong>Receipt Id: </strong><u>{{ receiptid }}</u><br>
+                <strong>Date: </strong><u>{{ receiptDate }}</u><br>
+                <strong>Received From: </strong><u>{{ receivedFrom }}</u><br>
+                <strong>Amount: </strong><u>{{ amount }}</u><br>
+                <strong>For Payment Of: </strong><u>{{ paymentOf }}</u><br>
+                <strong>Payment Type: </strong><u>{{ paymentType }}</u><br>
+                <strong>Signature: </strong><u>{{ signature }}</u><br>
+                <strong>Email: </strong><u>{{ email }}</u>
+            </p>
           </div>
         </form>
       </div>

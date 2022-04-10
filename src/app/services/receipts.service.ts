@@ -31,6 +31,8 @@ export class ReceiptsService {
 
   getReceiptsByDate(receipts: Receipt[], startDate: Date, endDate: Date){
     this.myReceiptsByDate = [];
+    this.fromDate = new Date(startDate);
+    this.toDate = new Date(endDate);
 
     for (let i = 0; i < receipts.length; i++) {
       this.receiptDate = new Date(this.receipts[i].receiptDate);
@@ -41,9 +43,6 @@ export class ReceiptsService {
       this.fromDate = this.convertFromDate.split(' ').slice(0, 4).join(' ');
       this.toDate = this.convertToDate.split(' ').slice(0, 4).join(' ');
 
-      console.log("shortdate: " + this.shortDate);
-      console.log("startdate: " + this.fromDate);
-      console.log("endDate: " + this.toDate);
       if(this.shortDate >= this.fromDate && this.shortDate <= this.toDate) {
           this.myReceiptsByDate.push(this.receipts[i]);
       }
