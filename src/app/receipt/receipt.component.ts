@@ -18,12 +18,6 @@ export class ReceiptComponent implements OnInit {
   newReceipt;
   receiptDate;
   currentDate;
-  month;
-  day;
-  year;
-  //shortDate;
-
-
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -49,17 +43,12 @@ export class ReceiptComponent implements OnInit {
     }else {
       this.submitted = true;
       this.receiptDate = new Date(this.receiptForm.value.receiptDate);
-      //this.month = this.receiptDate.getMonth() + 1;
-      //this.day = this.receiptDate.getDate();
-      //this.year = this.receiptDate.getFullYear();
-      //this.shortDate = this.month + "/" + this.day + "/" + this.year;
-
 
       this.receiptsService.addReceipt({receiptDate: this.receiptDate, receivedFrom: this.receiptForm.value.receivedFrom,
         amount: this.receiptForm.value.amount.toFixed(2), paymentOf: this.receiptForm.value.paymentOf, paymentType: this.receiptForm.value.payment_type,
         signature: this.receiptForm.value.signature, email: this.user.email, user: this.user.id});
 
-      this.dataStorageService.storeReceipt({receiptDate: this.receiptForm.value.receiptDate, receivedFrom: this.receiptForm.value.receivedFrom,
+      this.dataStorageService.storeReceipt({receiptDate: this.receiptDate, receivedFrom: this.receiptForm.value.receivedFrom,
         amount: this.receiptForm.value.amount.toFixed(2), paymentOf: this.receiptForm.value.paymentOf, paymentType: this.receiptForm.value.payment_type,
         signature: this.receiptForm.value.signature, email: this.user.email, user: this.user.id})
         .subscribe(data => {
@@ -76,6 +65,10 @@ export class ReceiptComponent implements OnInit {
   onDisplayClicked(){
       this.router.navigate(['/displayReceipt', this.user.email, this.user.firstname, this.user.lastname, this.user.id], {relativeTo: this.route});
   }
+
+  onEditAccounts(){
+    this.router.navigate(['/editAccounts', this.user.email, this.user.firstname, this.user.lastname, this.user.id], {relativeTo: this.route});
+}
 
   clearSubmitMessage(){
     this.submitted = false;

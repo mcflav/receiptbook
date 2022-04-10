@@ -1,6 +1,5 @@
 <header>
-  <h3>Welcome {{ user.firstname }} {{ user.lastname }}</h3>
-  <h2>Receipt Form</h2>
+  <h3>Edit Accounts Form</h3>
 </header>
 <body>
     <div class="container">
@@ -9,11 +8,10 @@
           <app-alert [message]="error" *ngIf="error" (close)="onHandleError()" style="color: red"></app-alert>
           <form (ngSubmit)="onSubmit()" #f="ngForm">
             <br>
-            <div class="form-group" id="user-data">
+            <div class="col-md-5" id="user-data">
               <label for="receiptDate">Receipt Date:</label>
               <input
                 type="date"
-                onfocus="this.value=''"
                 id="receiptDate"
                 class="form-control"
                 ngModel
@@ -22,6 +20,22 @@
                 #receiptDate="ngModel"
                 (click)="clearSubmitMessage()">
               <span class="help-block" *ngIf="!receiptDate.valid && receiptDate.touched">Please enter the receipt date!</span><br>
+            </div>
+            <div class="col-md-7">
+              <label for="receiptId">Receipt Id:</label>
+              <input
+                type="text"
+                onfocus="this.value=''"
+                id="receiptId"
+                class="form-control"
+                ngModel
+                name="receiptId"
+                required
+                #receiptId="ngModel"
+                (click)="clearSubmitMessage()">
+              <span class="help-block" *ngIf="!receiptId.valid && receiptId.touched">Please enter the receipt id you are updating!</span><br>
+            </div>
+            <div class="col-md-5">
               <label for="receivedFrom">Received From:</label>
               <input
                 type="text"
@@ -34,6 +48,8 @@
                 #receivedFrom="ngModel"
                 (click)="clearSubmitMessage()">
               <span class="help-block" *ngIf="!receivedFrom.valid && receivedFrom.touched">Please enter the customer name the payment was received from!</span><br>
+            </div>
+            <div class="col-md-7">
               <label for="amount">Amount:</label>
               <input
                 type="number"
@@ -46,6 +62,8 @@
                 #amount="ngModel"
                 (click)="clearSubmitMessage()">
               <span class="help-block" *ngIf="!amount.valid && amount.touched">Please enter the amount paid by the customer!</span><br>
+            </div>
+            <div class="col-md-5">
               <label for="paymentOf">For Payment Of:</label>
               <input
                 type="text"
@@ -57,7 +75,9 @@
                 required
                 #paymentOf="ngModel"
                 (click)="clearSubmitMessage()">
-                <span class="help-block" *ngIf="!paymentOf.valid && paymentOf.touched">Please enter what this payment is for!</span><br>
+              <span class="help-block" *ngIf="!paymentOf.valid && paymentOf.touched">Please enter what this payment is for!</span><br>
+            </div>
+            <div class="col-md-7">
               <label for="signature">Signature:</label>
               <input
                 type="text"
@@ -79,32 +99,40 @@
               <input type="radio" id="paypal" name="payment_type" value="Paypal" ngModel #payment_type="ngModel">
               <label for="paypal" id="paypalLabel">Paypal</label>
               <input type="radio" id="zelle" name="payment_type" value="Zelle" ngModel #payment_type="ngModel">
-              <label for="zelle" id="zelleLabel">Zelle</label><br>
+              <label for="zelle" id="zelleLabel">Zelle</label>
             </section>
             <div class="form-group">
               <button
                 class="btn btn-primary"
                 type="submit"
-                [disabled]="!f.valid">Submit
-              </button>
-            </div><br>
-            <div *ngIf="submitted">
-              <h3>Receipt Submitted!</h3>
-          </div>
-            <div class="form-group">
-              <button
-                class="btn btn-primary"
-                type="button"
-                (click)="onDisplayClicked()">Display Receipts
+                [disabled]="!f.valid">Update Account
               </button>
             </div><br>
             <div class="form-group">
               <button
                 class="btn btn-primary"
                 type="button"
-                (click)="onEditAccounts()">Edit Accounts
+                (click)="onBack()">Back
               </button>
             </div>
+            <div *ngIf="submitted">
+              <h3>Account Updated!</h3>
+          </div><br>
+          <div>
+            <p class="acctHeader">Accounts are shown below. Use the receipt id below to update account above:</p>
+          </div>
+          <div *ngFor="let receipt of getReceipts">
+              <div class="receiptHeader">RECEIPT</div>
+                <p class="solid"><strong>Receipt Id: </strong><u>{{ receipt._id }}</u><br>
+                <strong>Date: </strong><u>{{ receipt.receiptDate }}</u><br>
+                <strong>Received From: </strong><u>{{ receipt.receivedFrom }}</u><br>
+                <strong>Amount: </strong><u>{{ receipt.amount }}</u><br>
+                <strong>For Payment Of: </strong><u>{{ receipt.paymentOf }}</u><br>
+                <strong>Payment Type: </strong><u>{{ receipt.paymentType }}</u><br>
+                <strong>Signature: </strong><u>{{ receipt.signature }}</u><br>
+                <strong>Email: </strong><u>{{ receipt.email }}</u>
+                </p>
+          </div><br>
           </form>
         </div>
       </div>

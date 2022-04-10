@@ -42,7 +42,7 @@ export class AccountantDisplayComponent implements OnInit {
             this.fromDate = new Date(this.displayForm.value.fromDate), this.toDate = new Date(this.displayForm.value.toDate));
           this.noReceipts = this.getReceiptsByDate[0];
           if(this.noReceipts === "No Receipts" || this.noReceipts === undefined){
-            this.error = "There are no receipts for this date range or you entered an incorrect date format!";
+            this.error = "There are no receipts for this date range!";
             this.viewRange = false;
           }
       },

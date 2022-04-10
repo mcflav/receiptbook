@@ -36,15 +36,13 @@ interface StoreReceiptResponseData {
 @Injectable({providedIn: 'root'})
 export class DataStorageService {
     user = new BehaviorSubject<ValidateUser>(null);
-    elapsedTime = 86400;
+    elapsedTime = 3600;
     milliseconds = 1000;
     receipts: [] = [];
     private tokenExpirationTimer: any;
     private _expirationDate = new Date(new Date().getTime() + this.elapsedTime * this.milliseconds);
 
     constructor(private http: HttpClient,
-        private usersService: UsersService,
-        private receiptsService: ReceiptsService,
         private router: Router){}
 
     storeUser(user: Users) {
@@ -55,7 +53,6 @@ export class DataStorageService {
     }
 
     storeReceipt(receipt: Receipt) {
-      console.log(receipt);
         const body = receipt;
         return this.http.post<StoreReceiptResponseData>('https://intense-brushlands-88175.herokuapp.com/api/v1/receipts',
           body).pipe(catchError(this.handleError));
@@ -74,11 +71,32 @@ export class DataStorageService {
         ).pipe(catchError(this.handleError));
     }
 
+    fetchReceiptById(receiptId: string){
+      return this.http.get<Receipt[]>('https://intense-brushlands-88175.herokuapp.com/api/v1/receipts/' + receiptId)
+          .pipe(catchError(this.handleError));
+    }
+
     fetchReceiptsByEmail(email: string) {
         return this.http.post('https://intense-brushlands-88175.herokuapp.com/api/v1/receipts/receiptsByEmail',
             {
                 email: email
             }
+        ).pipe(catchError(this.handleError));
+    }
+
+    updateReceipt(receiptId: string, date: string, receivedFrom: string, amount: number, paymentOf: string, paymentType: string,
+      signature: string, email: string, user: string) {
+      return this.http.put('https://intense-brushlands-88175.herokuapp.com/api/v1/receipts/' + receiptId,
+        {
+            receiptDate: date,
+            receivedFrom: receivedFrom,
+            amount: amount,
+            paymentOf: paymentOf,
+            paymentType: paymentType,
+            signature: signature,
+            email: email,
+            user: user
+        }
         ).pipe(catchError(this.handleError));
     }
 
