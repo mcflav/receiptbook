@@ -89,7 +89,7 @@
               </button>
             </div><br>
             <div *ngIf="submitted">
-              <h3>Receipt Submitted!</h3>
+              <h3>Receipt Submitted!</h3><br>
           </div>
             <div class="form-group">
               <button
@@ -103,6 +103,13 @@
                 class="btn btn-primary"
                 type="button"
                 (click)="onEditAccounts()">Edit Accounts
+              </button>
+            </div><br>
+            <div class="form-group">
+              <button
+                class="btn btn-primary"
+                type="button"
+                (click)="onDeleteAccount()">Delete Account
               </button>
             </div>
           </form>

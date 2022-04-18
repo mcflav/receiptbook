@@ -11,6 +11,7 @@ const appRoutes: Routes = [
     { path: 'receipt/:email/:firstname/:lastname/:id', loadChildren: () => import('./receipt/receipt.module').then(m => m.ReceiptModule)},
     { path: 'displayReceipt/:email/:firstname/:lastname/:id', loadChildren: () => import('./display-receipt/display-receipt.module').then(m => m.DisplayReceiptModule)},
     { path: 'editAccounts/:email/:firstname/:lastname/:id', loadChildren: () => import('./edit-accounts/edit-accounts.module').then(m => m.EditAccountsModule )},
+    { path: 'deleteAccount/:email/:firstname/:lastname/:id', loadChildren: () => import('./delete-account/delete-account.module').then(m => m.DeleteAccountModule )},
     { path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found!'} },
     { path: '**', redirectTo: '/not-found'}
 ];

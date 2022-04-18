@@ -40,7 +40,9 @@ export class ReceiptComponent implements OnInit {
   onSubmit(){
     if(this.receiptForm.value.payment_type === ''){
       this.error = "Please select a payment type.";
-    }else {
+    } else if(this.receiptForm.value.amount <= 0){
+      this.error = "Please enter an amount greater than zero.";
+    } else {
       this.submitted = true;
       this.receiptDate = new Date(this.receiptForm.value.receiptDate);
 
@@ -68,7 +70,12 @@ export class ReceiptComponent implements OnInit {
 
   onEditAccounts(){
     this.router.navigate(['/editAccounts', this.user.email, this.user.firstname, this.user.lastname, this.user.id], {relativeTo: this.route});
-}
+  }
+
+  onDeleteAccount(){
+    console.log('delete Acccount');
+    this.router.navigate(['/deleteAccount', this.user.email, this.user.firstname, this.user.lastname, this.user.id], {relativeTo: this.route});
+  }
 
   clearSubmitMessage(){
     this.submitted = false;

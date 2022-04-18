@@ -1,0 +1,54 @@
+<header>
+  <h2>Delete Account</h2>
+</header>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <app-alert [message]="error" *ngIf="error" (close)="onHandleError()" style="color: red"></app-alert>
+        <form (ngSubmit)="onDelete('account')" #f="ngForm">
+          <br>
+            <div class="form-group">
+              <h3><u>Account:</u></h3>
+              <p><strong>Email: {{ email }}</strong></p>
+              <p><strong>First Name: {{ firstname }}</strong></p>
+              <p><strong>Last Name: {{ lastname }}</strong></p>
+            </div><br>
+            <div class="form-group">
+              <button
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="!f.valid">Delete Account
+              </button>
+            </div><br>
+            <div class="form-group">
+              <button
+                class="btn btn-primary"
+                type="button"
+                (click)="onBack()">Back
+              </button>
+            </div><br>
+          <div *ngIf="accountDeleted">
+            <div *ngFor="let user of deletedUser">
+              <h3>Following Account Deleted:</h3>
+              <p><strong>EMAIL: {{ user.email }}</strong></p>
+              <p><strong>FIRST NAME: {{ user.firstname }}</strong></p>
+              <p><strong>LAST NAME: {{ user.lastname }}</strong></p>
+            </div>
+          </div>
+          <div *ngIf="receiptsDeleted">
+            <h3>Following Reciepts for this Account Deleted:</h3>
+            <div *ngFor="let receipt of deletedReceipts">
+              <p><strong>RECEIPT ID: {{ receipt._id }}</strong></p>
+              <p><strong>RECEIPT DATE: {{ receipt.receiptDate }}</strong></p>
+              <p><strong>RECEIVED FROM: {{ receipt.receivedFrom }}</strong></p>
+              <p><strong>AMOUNT: {{ receipt.amount }}</strong></p>
+              <p><strong>PAYMENT FOR: {{ receipt.paymentOf }}</strong></p>
+              <p><strong>PAYMENT TYPE: {{ receipt.paymentType }}</strong></p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
