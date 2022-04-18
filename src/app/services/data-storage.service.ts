@@ -52,15 +52,20 @@ export class DataStorageService {
           body).pipe(catchError(this.handleError));
     }
 
+    fetchUsers(){
+      return this.http.get<Users[]>('https://intense-brushlands-88175.herokuapp.com/api/v1/users')
+          .pipe(catchError(this.handleError));
+    }
+
+    deleteUser(userId: string){
+      return this.http.delete('https://intense-brushlands-88175.herokuapp.com/api/v1/users/' + userId)
+          .pipe(catchError(this.handleError));
+    }
+
     storeReceipt(receipt: Receipt) {
         const body = receipt;
         return this.http.post<StoreReceiptResponseData>('https://intense-brushlands-88175.herokuapp.com/api/v1/receipts',
           body).pipe(catchError(this.handleError));
-    }
-
-    fetchUsers(){
-        return this.http.get<Users[]>('https://intense-brushlands-88175.herokuapp.com/api/v1/users')
-            .pipe(catchError(this.handleError));
     }
 
     fetchReceipts(userId: string) {
@@ -98,6 +103,11 @@ export class DataStorageService {
             user: user
         }
         ).pipe(catchError(this.handleError));
+    }
+
+    deleteReceipt(receiptId: string){
+      return this.http.delete('https://intense-brushlands-88175.herokuapp.com/api/v1/receipts/' + receiptId)
+          .pipe(catchError(this.handleError));
     }
 
     validateUser(user: UserLogin) {

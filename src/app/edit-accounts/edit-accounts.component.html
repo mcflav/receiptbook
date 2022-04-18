@@ -109,15 +109,45 @@
               </button>
             </div><br>
             <div class="form-group">
+              <label for="receipt" id="receiptLabel">Receipt Id:</label>
+              <input
+                type="text"
+                onfocus="this.value=''"
+                id="receipt"
+                class="form-control"
+                ngModel
+                name="receipt"
+                #receipt="ngModel"
+                (click)="clearDeleteMessage()">
+            </div><br>
+            <div class="form-group">
+              <button
+                class="btn btn-primary"
+                type="button"
+                (click)="onDeleteReceipt('receipt')">Delete Receipt
+              </button>
+            </div><br>
+            <div class="form-group">
               <button
                 class="btn btn-primary"
                 type="button"
                 (click)="onBack()">Back
               </button>
-            </div>
+            </div><br>
             <div *ngIf="submitted">
-              <h3>Account Updated!</h3>
-          </div><br>
+              <h3>Account Updated!</h3><br>
+            </div>
+            <div *ngIf="deleted">
+              <h3>Following Receipt Deleted:</h3><br>
+              <div *ngFor="let receipt of deletedReceipt">
+                <p><strong>RECEIPT ID: {{ receipt._id }}</strong></p>
+                <p><strong>RECEIPT DATE: {{ receipt.receiptDate }}</strong></p>
+                <p><strong>RECEIVED FROM: {{ receipt.receivedFrom }}</strong></p>
+                <p><strong>AMOUNT: {{ receipt.amount }}</strong></p>
+                <p><strong>PAYMENT FOR: {{ receipt.paymentOf }}</strong></p>
+                <p><strong>PAYMENT TYPE: {{ receipt.paymentType }}</strong></p>
+              </div>
+            </div>
           <div>
             <p class="acctHeader">Accounts are shown below. Use the receipt id below to update account above:</p>
           </div>

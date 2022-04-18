@@ -14,6 +14,7 @@ export class EditAccountsComponent implements OnInit {
   user: {email: string, firstname: string, lastname: string, id: string};
   error: string = null;
   submitted = false;
+  deleted = false;
   getReceipts;
   noReceipts;
   receipt = {
@@ -24,6 +25,8 @@ export class EditAccountsComponent implements OnInit {
     paymentType: '',
     signature: '',
   }
+  deletedReceipt = [];
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private receiptsService: ReceiptsService,
@@ -66,6 +69,29 @@ export class EditAccountsComponent implements OnInit {
       })
   }
 
+  onDeleteReceipt(name: string){
+    if(this.receiptForm.value.receipt === ''){
+      this.error = "The receipt id input box cannot be empty!";
+    } else {
+      if(confirm("Are you sure you want to delete this " + name)) {
+        this.dataStorageService.deleteReceipt(this.receiptForm.value.receipt)
+        .subscribe(data => {
+          this.deletedReceipt.push(data);
+          console.log(this.deletedReceipt);
+          this.noReceipts = this.deletedReceipt[0];
+          if(this.noReceipts === undefined){
+            this.error = "This receipt id does not exist for this account!";
+            this.deleted = false;
+          }
+          this.deleted = true;
+        },
+        errorMessage => {
+          this.error = errorMessage;
+        });
+      }
+    }
+  }
+
   onBack(){
     this.router.navigate(['/receipt', this.user.email, this.user.firstname, this.user.lastname, this.user.id], {relativeTo: this.route});
   }
@@ -88,6 +114,10 @@ export class EditAccountsComponent implements OnInit {
 
   clearSubmitMessage(){
     this.submitted = false;
+  }
+
+  clearDeleteMessage(){
+    this.deleted = false;
   }
 
   onHandleError(){
